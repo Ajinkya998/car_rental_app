@@ -5,7 +5,8 @@ import 'package:car_rental/presentation/widgets/more_card.dart';
 import 'package:flutter/material.dart';
 
 class CarDetailScreen extends StatefulWidget {
-  const CarDetailScreen({super.key});
+  final CarModel carModel;
+  const CarDetailScreen({super.key, required this.carModel});
 
   @override
   State<CarDetailScreen> createState() => _CarDetailScreenState();
@@ -32,7 +33,7 @@ class _CarDetailScreenState extends State<CarDetailScreen>
 
   @override
   void dispose() {
-    _controller!.forward();
+    _controller!.dispose();
     super.dispose();
   }
 
@@ -50,12 +51,7 @@ class _CarDetailScreenState extends State<CarDetailScreen>
       body: SingleChildScrollView(
         child: Column(
           children: [
-            CarCard(
-                carModel: CarModel(
-                    model: "Fortuner GR",
-                    distance: 870,
-                    fuelCapacity: 50,
-                    pricePerHour: 45)),
+            CarCard(carModel: widget.carModel),
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -93,11 +89,8 @@ class _CarDetailScreenState extends State<CarDetailScreen>
                         context,
                         MaterialPageRoute(
                           builder: (context) => MapDetailsScreen(
-                              car: CarModel(
-                                  model: "Fortuner GR",
-                                  distance: 870,
-                                  fuelCapacity: 50,
-                                  pricePerHour: 45)),
+                            car: widget.carModel
+                          ),
                         ),
                       );
                     },
@@ -130,23 +123,11 @@ class _CarDetailScreenState extends State<CarDetailScreen>
               padding: const EdgeInsets.all(20),
               child: Column(children: [
                 MoreCard(
-                    carModel: CarModel(
-                        model: "Fortuner GR - 1",
-                        distance: 870 + 150,
-                        fuelCapacity: 50,
-                        pricePerHour: 45)),
+                    carModel: widget.carModel,),
                 MoreCard(
-                    carModel: CarModel(
-                        model: "Fortuner GR - 2",
-                        distance: 870 + 190,
-                        fuelCapacity: 50,
-                        pricePerHour: 45)),
+                    carModel: widget.carModel),
                 MoreCard(
-                    carModel: CarModel(
-                        model: "Fortuner GR - 3",
-                        distance: 870 + 320,
-                        fuelCapacity: 50,
-                        pricePerHour: 45)),
+                    carModel: widget.carModel),
               ]),
             ),
           ],
